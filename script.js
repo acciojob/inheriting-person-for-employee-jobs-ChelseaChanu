@@ -5,7 +5,7 @@ function Person(name, age) {
 }
 
 Person.prototype.greet = function () {
-	console.log('Hello my name is ${this.name}, I am ${this.age} years old');
+	console.log(`Hello, my name is ${this.name}, I am ${this.age} years old`);
 }
 
 function Employee(name, age, jobTitle) {
@@ -14,10 +14,16 @@ function Employee(name, age, jobTitle) {
 	this.jobTitle = jobTitle;
 }
 
-Employee.__proto__ = Person;
-Employee.prototype.jobGreet() = function () {
+Employee.prototype = Object.create(Person.prototype);
+Employee.prototype.jobGreet = function () {
 	console.log(`Hello, my name is ${this.name}, I am ${this.age} years old, and my job title is ${this.jobTitle}.`);
 }
+
+const person = new Person ('Chel', 23);
+const emp = new Employee("Chel", 23, "engineer");
+person.greet();
+emp.greet();
+emp.jobGreet();
 
 // Do not change code below this line
 window.Person = Person;
